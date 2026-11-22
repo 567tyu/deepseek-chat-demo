@@ -1,4 +1,4 @@
-package com.example.m3app;
+package com.deepseek.chatdemo;
 
 import android.content.Context;
 import android.content.res.AssetManager;

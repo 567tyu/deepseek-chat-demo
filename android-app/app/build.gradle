@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.m3app'
+    namespace 'com.deepseek.chatdemo'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.example.m3app"
+        applicationId "com.deepseek.chatdemo"
         minSdk 24
         targetSdk 35
         versionCode 1

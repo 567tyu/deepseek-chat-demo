@@ -1,4 +1,4 @@
-package com.example.m3app;
+package com.deepseek.chatdemo;
 
 import android.content.Intent;
 import android.os.Bundle;
