@@ -163,41 +163,6 @@
   background-color: var(--dsw-alias-state-error-primary);
 }
 
-.modelBar {
-  display: flex;
-  justify-content: center;
-  padding: 10px 12px 0;
-}
-
-.modelBox {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  max-width: 100%;
-  height: 32px;
-  padding: 0 12px;
-  border: 1px solid var(--dsw-alias-border-l2);
-  border-radius: 16px;
-  background-color: var(--dsw-alias-bg-layer-3);
-  color: var(--dsw-alias-label-primary);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-  cursor: pointer;
-  user-select: none;
-
-  &:hover {
-    background-color: var(--dsw-alias-interactive-bg-hover);
-  }
-}
-
-.modelBoxText {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .textareaWrapper {
   position: relative;
   width: 100%;

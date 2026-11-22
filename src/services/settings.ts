@@ -2,7 +2,6 @@ import { create } from 'zustand'
 import type { TtsVoice } from './api/speech.js'
 import { normalizeLocation, type UserLocation } from './location.js'
 import {
-  DEFAULT_MODEL,
   STORAGE_KEYS,
   getApiOrigin,
   getSelectedModel,
@@ -142,13 +141,15 @@ export const setApiKey = (apiKey: string | null) => {
 export const setApiEndpoint = (apiEndpoint: string) => {
   const value = apiEndpoint.trim()
   write(STORAGE_KEYS.apiEndpoint, value || null)
-  useSettings.setState({ apiEndpoint: value || getApiOrigin() })
+  // 允许留空：留空时请求层再回退默认端点，避免输入框被默认值回填卡住
+  useSettings.setState({ apiEndpoint: value })
 }
 
 export const setModel = (model: string) => {
   const value = model.trim()
   write(STORAGE_KEYS.model, value || null)
-  useSettings.setState({ model: value || DEFAULT_MODEL })
+  // 允许留空：留空时请求层再回退默认模型，避免输入框被默认值回填卡住
+  useSettings.setState({ model: value })
 }
 
 /** 合并去重：手动添加的模型排在前面，其次是拉取到的模型 */

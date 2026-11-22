@@ -13,4 +13,19 @@
     <string name="server_start_failed">启动失败：</string>
     <string name="port_invalid">端口需在 1024–65535 之间</string>
     <string name="main_hint">API 端点、API Key、模型等参数在网页内的「设置」中调节；默认访问 127.0.0.1:8080，端口可在上方修改。</string>
+
+    <string name="terminal_title">终端命令行</string>
+    <string name="terminal_run">执行</string>
+    <string name="terminal_clear">清屏</string>
+    <string name="terminal_command_hint">输入 shell 命令</string>
+    <string name="terminal_command_empty">请先输入要执行的命令</string>
+    <string name="terminal_exit_code">退出码：%1$d</string>
+    <string name="terminal_hint">内置命令行运行在应用沙箱目录，可执行 shell 命令、安装用户态工具；本地 Web 也可通过 /api/exec 让 AI 调用。</string>
+
+    <string name="open_terminal">终端命令行</string>
+    <string name="permission_settings">无障碍 / 屏幕访问</string>
+    <string name="permission_hint">无障碍与屏幕访问为可选权限，点击进入系统设置后由你决定是否开启；不开不影响聊天功能。</string>
+
+    <string name="accessibility_service_label">DeepSeek 无障碍服务</string>
+    <string name="accessibility_service_description">可选启用后用于读取界面内容；不启用不影响应用使用。</string>
 </resources>

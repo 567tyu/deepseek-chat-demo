@@ -1,7 +1,7 @@
 /**
  * Messages API（Anthropic 兼容格式）协议类型，只取本应用用到的部分。
  * 文档：https://api-docs.deepseek.com/zh-cn/api/create-message
- * 声明 deepseek_web_search / deepseek_read_url 或设置 safety_check.level 为 high 时进入扩展模式。
+ * 声明 deepseek_web_search / deepseek_read_url 时进入扩展模式。
  */
 
 /** 模型名：兼容任意厂商接口返回的模型标识（如 deepseek-chat、gpt-4o、qwen-plus 等） */
@@ -179,7 +179,6 @@ export type CreateMessageRequest = {
   messages: MessageParam[]
   thinking: { type: 'enabled' | 'disabled' }
   tools: (DeepseekWebSearchTool | DeepseekReadUrlTool)[]
-  safety_check: { level: 'high' }
   title?: { enabled: boolean }
 }
 

@@ -1,0 +1,1 @@
+"use strict";(self.rspackChunkchat_demo=self.rspackChunkchat_demo||[]).push([[6372],{1231(e,s,a){a.d(s,{createTreemapServices:()=>c.d});var c=a(5167);a(6494)}}]);

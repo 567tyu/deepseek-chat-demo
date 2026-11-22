@@ -1,7 +1,11 @@
 package com.example.m3app;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,11 +14,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 主界面：启停内嵌本地服务器、修改端口，并在应用内 WebView 打开前端页面。
  * API 端点 / Key / 模型等参数在网页的「设置」里调节。
  */
 public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_STORAGE = 1001;
 
     private LocalWebServer server;
 
@@ -23,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText portInput;
     private MaterialButton toggleBtn;
     private MaterialButton openBtn;
+    private MaterialButton terminalBtn;
+    private MaterialButton permissionBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +45,11 @@ public class MainActivity extends AppCompatActivity {
         portInput = findViewById(R.id.portInput);
         toggleBtn = findViewById(R.id.toggleBtn);
         openBtn = findViewById(R.id.openBtn);
+        terminalBtn = findViewById(R.id.terminalBtn);
+        permissionBtn = findViewById(R.id.permissionBtn);
 
         portInput.setText(String.valueOf(Prefs.getPort(this)));
+        requestStoragePermissions();
 
         toggleBtn.setOnClickListener(v -> {
             if (isRunning()) {
@@ -55,7 +69,36 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        terminalBtn.setOnClickListener(v -> startActivity(new Intent(this, TerminalActivity.class)));
+
+        permissionBtn.setOnClickListener(v -> {
+            try {
+                startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+            } catch (Exception e) {
+                Toast.makeText(this, R.string.server_start_failed + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
         refresh();
+    }
+
+    /** 存储/媒体权限在初始化时申请；无障碍与屏幕访问为可选，由系统设置里决定。 */
+    private void requestStoragePermissions() {
+        List<String> permissions = new ArrayList<>();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(Manifest.permission.READ_MEDIA_IMAGES);
+        } else {
+            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        List<String> missing = new ArrayList<>();
+        for (String permission : permissions) {
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                missing.add(permission);
+            }
+        }
+        if (!missing.isEmpty()) {
+            requestPermissions(missing.toArray(new String[0]), REQUEST_STORAGE);
+        }
     }
 
     private boolean isRunning() {

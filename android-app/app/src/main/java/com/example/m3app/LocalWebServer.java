@@ -6,6 +6,8 @@ import android.util.Log;
 
 import fi.iki.elonen.NanoHTTPD;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -56,6 +58,9 @@ public class LocalWebServer extends NanoHTTPD {
             uri = "/";
         }
         try {
+            if ("/api/exec".equals(normalize(uri))) {
+                return handleExec(session);
+            }
             String path = normalize(uri);
             byte[] body = readAsset(path);
             if (body == null) {
@@ -73,6 +78,38 @@ public class LocalWebServer extends NanoHTTPD {
             Log.e(TAG, "serve error: " + uri, e);
             return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, "text/plain", e.getMessage());
         }
+    }
+
+    /** POST /api/exec：在沙箱目录执行一条命令，仅允许本机回环访问。 */
+    private Response handleExec(IHTTPSession session) {
+        if (!isLoopback(session)) {
+            return newFixedLengthResponse(Response.Status.FORBIDDEN, "text/plain", "Forbidden");
+        }
+        if (!"POST".equalsIgnoreCase(session.getMethod().name())) {
+            return newFixedLengthResponse(Response.Status.METHOD_NOT_ALLOWED, "text/plain", "Use POST");
+        }
+        try {
+            Map<String, String> body = new HashMap<>();
+            session.parseBody(body);
+            String raw = body.get("postData");
+            JSONObject json = raw != null ? new JSONObject(raw) : new JSONObject();
+            String command = json.optString("command", "");
+            ShellSession.Result result = ShellSession.exec(ctx, command);
+            JSONObject out = new JSONObject();
+            out.put("stdout", result.stdout);
+            out.put("stderr", result.stderr);
+            out.put("code", result.code);
+            return newFixedLengthResponse(Response.Status.OK, "application/json", out.toString());
+        } catch (Exception e) {
+            Log.e(TAG, "exec error", e);
+            return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, "application/json",
+                    "{\"error\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    private boolean isLoopback(IHTTPSession session) {
+        String ip = session.getRemoteIpAddress();
+        return "127.0.0.1".equals(ip) || "::1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip);
     }
 
     private String normalize(String uri) {

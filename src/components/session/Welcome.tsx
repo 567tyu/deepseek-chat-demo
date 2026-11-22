@@ -15,6 +15,7 @@ export const Welcome = () => {
       <div className={styles.welcome}>
         <div className={styles.greeting}>
           <DeepSeekMark size={56} />
+          <span className={styles.greetingText}>{t('welcomeMessageChat250808')}</span>
         </div>
         <ChatInput sessionId={null} />
         {isMobile ? <div className={styles.caveat}>{t('contentCaveat')}</div> : null}
