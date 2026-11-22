@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Material 3 色彩方案（浅色）—— DeepSeek 蓝 -->
+<resources>
+    <color name="primary">#4D6BFE</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#E0E7FF</color>
+    <color name="on_primary_container">#001145</color>
+
+    <color name="secondary">#565E7D</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#DDE3FF</color>
+    <color name="on_secondary_container">#131C35</color>
+
+    <color name="tertiary">#7D5260</color>
+    <color name="on_tertiary">#FFFFFF</color>
+    <color name="tertiary_container">#FFD8E4</color>
+    <color name="on_tertiary_container">#31111D</color>
+
+    <color name="error">#B3261E</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="error_container">#F9DEDC</color>
+    <color name="on_error_container">#410E0B</color>
+
+    <color name="background">#FFFBFE</color>
+    <color name="on_background">#1C1B1F</color>
+    <color name="surface">#FFFBFE</color>
+    <color name="on_surface">#1C1B1F</color>
+    <color name="surface_variant">#E1E2EC</color>
+    <color name="on_surface_variant">#454651</color>
+
+    <color name="outline">#767785</color>
+    <color name="outline_variant">#C6C6D4</color>
+
+    <color name="surface_container_lowest">#FFFFFF</color>
+    <color name="surface_container_low">#F5F6FC</color>
+    <color name="surface_container">#EFF0F7</color>
+    <color name="surface_container_high">#E9EAF2</color>
+    <color name="surface_container_highest">#E3E4EC</color>
+
+    <color name="inverse_surface">#303036</color>
+    <color name="inverse_on_surface">#F2F0F7</color>
+    <color name="inverse_primary">#4D6BFE</color>
+</resources>

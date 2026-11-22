@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DeepSeek</string>
+    <string name="status_running">服务运行中</string>
+    <string name="status_stopped">服务未启动</string>
+    <string name="port_label">端口</string>
+    <string name="start">启动服务</string>
+    <string name="stop">停止服务</string>
+    <string name="open_app">打开应用</string>
+    <string name="server_started">本地服务已启动</string>
+    <string name="server_stopped">本地服务已停止</string>
+    <string name="server_not_running">请先启动本地服务</string>
+    <string name="server_start_failed">启动失败：</string>
+    <string name="port_invalid">端口需在 1024–65535 之间</string>
+    <string name="main_hint">API 端点、API Key、模型等参数在网页内的「设置」中调节；默认访问 127.0.0.1:8080，端口可在上方修改。</string>
+</resources>
